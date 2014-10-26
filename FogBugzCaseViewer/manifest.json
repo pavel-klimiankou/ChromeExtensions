@@ -3,9 +3,8 @@
 	"manifest_version": 2, 
 	"version": "0.1",
 	"description": "FogBugz case prettifier and pre-analyzer",
-	//"permissions": [],
 	"content_scripts": [{
 		"matches": ["https://checkmate.fogbugz.com/f/cases/*"],
-		"js": ["index.js"]
+		"js": ["index.js", "parsers.js"]
 	}]
 }

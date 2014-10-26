@@ -1,5 +1,5 @@
-;(function () {
-	var onCaseLoad = (function () {
+FBCaseViewer = {
+	onCaseLoad: (function () {
 		var handlers = [],
 			postpone = function (handler) {
 				handlers.push(handler);
@@ -22,10 +22,23 @@
 		wait();
 
 		return postpone;
-	})();
-	
-	console.log("FB Viewer loaded.");
-	onCaseLoad(function () {
-		console.log("Case detected.");
-	});
-})();
+	})(),
+	getCases: function () {
+		return Array.prototype.slice.call(document.querySelectorAll("article.event")).filter(function (issue) {
+			return !(issue.classList.contains("borrowed") || issue.classList.contains("brief"));
+		});
+	},
+	getCaseBody: function (issue) {
+		return issue.querySelector(".body .bodycontent");
+	},
+	getCaseHeader: function (issue) {
+		return issue.querySelector("header");
+	},
+	parsers: []
+};
+
+console.log("FB Viewer loaded.");
+
+FBCaseViewer.onCaseLoad(function () {
+	console.log("Case detected.", FBCaseViewer.getCases().length);
+});
